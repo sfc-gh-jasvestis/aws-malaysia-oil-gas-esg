@@ -9,7 +9,6 @@ Malaysia committed to net-zero by 2050, and BURSA Malaysia now mandates sustaina
 ```mermaid
 flowchart LR
     S3[S3 Data Landing] --> SP[Snowpipe]
-    SP --> RAW[RAW Tables]
     RAW --> DT[Dynamic Tables]
     DT --> SEARCH[Cortex Search]
     DT --> SV[Semantic View]
