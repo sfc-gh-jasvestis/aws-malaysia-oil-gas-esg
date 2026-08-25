@@ -119,7 +119,7 @@ Industry research and Snowflake customer outcomes:
 - **BURSA Malaysia mandates enhanced sustainability reporting for all Main Market listed issuers from 2024** — [BURSA Malaysia](https://www.bursamalaysia.com/regulation/sustainability)
 - **PETRONAS targets net-zero carbon emissions by 2050 with 25% reduction by 2030** — [PETRONAS](https://www.petronas.com/sustainability/net-zero-carbon-emissions)
 - **Automated ESG data extraction reduces reporting time by 60-80% and improves accuracy** — [EY Climate Change](https://www.ey.com/en_gl/sustainability)
-
+- **Shell** (Snowflake customer): built a unified upstream data platform on Snowflake for real-time drilling optimization across 1,000+ wells -- [snowflake.com/customers/shell](https://www.snowflake.com/en/customers/all-customers/case-study/shell/)
 
 ## Key Demo Numbers
 
