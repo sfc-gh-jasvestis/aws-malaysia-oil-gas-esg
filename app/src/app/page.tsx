@@ -37,49 +37,25 @@ export default function HomePage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <KPICard title="Carbon Intensity" value="18.2 kgCO2e/boe" status="neutral" />
-        <KPICard title="Methane Leaks Detected" value="3" status="warning" />
+        <KPICard title="Methane Leaks" value="3" status="warning" />
         <KPICard title="Flaring Reduction" value="-24%" status="neutral" />
-        <KPICard title="Platforms Monitored" value="42" status="neutral" />
+        <KPICard title="Platforms" value="42" status="neutral" />
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="lg:col-span-1">
-          <GeoMap
-            country="malaysia"
-            markers={[{"label": "Kuala Lumpur", "value": "PETRONAS Tower HQ", "color": "blue", "size": "lg"}, {"label": "Johor Bahru", "value": "Refinery: 242K bpd", "color": "green", "size": "lg"}, {"label": "Kota Kinabalu", "value": "Deepwater ops", "color": "green", "size": "md"}, {"label": "Kuching", "value": "Sarawak gas", "color": "green", "size": "md"}]}
-            routes={[]}
-            title="Geographic Overview"
-            height={280}
-          />
+          <GeoMap country="malaysia" markers={[{"label": "Penang", "value": "Fab: util 92%", "color": "green", "size": "lg"}, {"label": "Kuala Lumpur", "value": "HQ", "color": "blue", "size": "md"}, {"label": "Johor Bahru", "value": "Southern ops", "color": "green", "size": "md"}]} routes={[]} title="Geographic Overview" height={280} />
         </div>
         <div className="lg:col-span-2 grid grid-cols-1 gap-4">
-      <div className="grid grid-cols-1 gap-4 grid-cols-1">
-        <Chart
-          data={data?.timeseries || [{ period: 'Loading', value: 0 }]}
-          type="line"
-          xKey="period"
-          yKeys={[{ key: 'value', name: 'tCO2e (K)' }]}
-          title="Carbon Emissions Trend (Monthly)"
-        />
-        <Chart
-          data={data?.categories || [{ category: 'Loading', count: 0 }]}
-          type="bar"
-          xKey="category"
-          yKeys={[{ key: 'count', name: 'Score' }]}
-          title="ESG Score by Asset"
-        />
-      </div>
+          <Chart data={data?.timeseries || [{ period: 'Loading', value: 0 }]} type="line" xKey="period" yKeys={[{ key: 'value', name: 'tCO2e (K)' }]} title="Carbon Emissions Trend (Monthly)" />
+          <Chart data={data?.categories || [{ category: 'Loading', count: 0 }]} type="bar" xKey="category" yKeys={[{ key: 'count', name: 'Score' }]} title="ESG Score by Asset" />
         </div>
       </div>
-      <DataTable
-        columns={[
+      <DataTable columns={[
           { key: 'id', header: '#' },
           { key: 'name', header: 'Asset' },
           { key: 'status', header: 'Rating' },
           { key: 'value', header: 'Carbon Intensity' },
-        ]}
-        data={data?.entities || []}
-        title="Asset ESG Dashboard"
-      />
+      ]} data={data?.entities || []} title="Asset ESG Dashboard" />
     </div>
   );
 
@@ -87,61 +63,25 @@ export default function HomePage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <KPICard title="Scope 1+2" value="1.4M tCO2e" />
-        <KPICard title="Scope 3 Estimate" value="12.4M tCO2e" />
         <KPICard title="CCS Capacity" value="2.4 MT/yr" />
+        <KPICard title="Net Zero Gap" value="-42%" />
       </div>
-      <Chart
-        data={data?.detail || [{ x: 'Loading', y: 0 }]}
-        type="area"
-        xKey="x"
-        yKeys={[{ key: 'y', name: 'MtCO2e' }]}
-        title="Pathway to Net Zero 2050"
-        height={400}
-      />
+      <Chart data={data?.detail || [{ x: 'Loading', y: 0 }]} type="area" xKey="x" yKeys={[{ key: 'y', name: 'MtCO2e' }]} title="Pathway to Net Zero 2050" height={400} />
     </div>
   );
 
   const domainTab2 = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <Chart
-          data={data?.breakdown || [{ label: 'A', value: 30 }, { label: 'B', value: 70 }]}
-          type="pie"
-          xKey="label"
-          yKeys={[{ key: 'value', name: 'Score' }]}
-          title="Regulatory Compliance by Region"
-        />
-        <ActionMemo
-          persona={{ name: 'Dato' Razali Ismail', role: 'VP Sustainability' }}
-          context={{}}
-          onGenerate={async () => ({
-            subject: 'Action Required',
-            body: 'AI-generated recommendation based on current data patterns and predicted trends.',
-            urgency: 'HIGH',
-            actions: ['Investigate methane leak at Platform Dulang-B', 'Submit MyCarbon report to BURSA', 'Accelerate CCS project timeline for Kasawari field'],
-          })}
-        />
+        <Chart data={data?.breakdown || [{ label: 'A', value: 30 }, { label: 'B', value: 70 }]} type="pie" xKey="label" yKeys={[{ key: 'value', name: 'Score' }]} title="Regulatory Score by Region" />
+        <ActionMemo persona={{ name: 'Dato' Razali Ismail', role: 'VP Sustainability' }} context={{}} onGenerate={async () => ({ subject: 'Action Required', body: 'AI-generated recommendation based on current data.', urgency: 'HIGH', actions: ['Investigate methane leak at Platform Dulang-B', 'Submit MyCarbon report to BURSA', 'Accelerate Kasawari CCS project'] })} />
       </div>
     </div>
   );
 
   const askAiTab = (
     <div className="h-[600px]">
-      <AskAI
-        title="Ask AI"
-        sampleQuestions={[
-          'Which platforms have the highest carbon intensity?',
-          'Show progress against 2030 emissions targets',
-          'What is the projected CCS offset for 2025?',
-        ]}
-        mode="both"
-        onSubmit={async (question, mode) => {
-          return {
-            answer: `[Demo Mode] Response to: "${question}" (${mode} mode). Connect to Snowflake for live data.`,
-            sql: mode === 'sql' ? 'SELECT * FROM CURATED.SUMMARY LIMIT 10;' : undefined,
-          };
-        }}
-      />
+      <AskAI title="Ask AI" mode="both" sampleQuestions={['Which platforms have highest carbon intensity?', 'Show progress against 2030 targets', 'What is the CCS offset projection for 2025?']} onSubmit={async (question, mode) => ({ answer: `[Demo Mode] Response to: "${question}" (${mode} mode). Connect to Snowflake for live data.`, sql: mode === 'sql' ? 'SELECT * FROM CURATED.SUMMARY LIMIT 10;' : undefined })} />
     </div>
   );
 
@@ -149,41 +89,25 @@ export default function HomePage() {
     <div className="space-y-6">
       <div className="rounded-lg border border-slate-200 bg-white p-6">
         <h2 className="mb-4 text-lg font-bold text-slate-900">Architecture</h2>
-        <p className="mb-4 text-sm text-slate-600">
-          This demo runs on Snowflake with optional AWS integration. See the README for the full architecture diagram.
-        </p>
+        <p className="mb-4 text-sm text-slate-600">This demo runs on Snowflake with optional AWS integration.</p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="rounded border border-blue-200 bg-blue-50 p-4">
             <h3 className="text-sm font-bold text-blue-800">Snowflake Features</h3>
             <ul className="mt-2 space-y-1 text-sm text-blue-700">
-              <li>• Dynamic Tables (5-min refresh)</li>
-              <li>• ML Functions (Forecast + Anomaly)</li>
-              <li>• Cortex Search + Agent</li>
-              <li>• Semantic View + Intelligence</li>
-              <li>• Alerts + Notifications</li>
+              <li>Dynamic Tables (5-min refresh)</li>
+              <li>ML Functions (Forecast + Anomaly)</li>
+              <li>Cortex Search + Agent</li>
+              <li>Semantic View + Intelligence</li>
             </ul>
           </div>
           <div className="rounded border border-orange-200 bg-orange-50 p-4">
             <h3 className="text-sm font-bold text-orange-800">AWS Services</h3>
             <ul className="mt-2 space-y-1 text-sm text-orange-700">
-              <li>• Amazon S3 (Strategy Docs)</li>
-              <li>• Amazon S3 + Kinesis</li>
-              <li>• Amazon SNS</li>
-              <li>• Amazon QuickSight + Q</li>
+              <li>Amazon S3 (Strategy Docs)</li>
+              <li>Amazon S3 + Kinesis</li>
+              <li>Amazon SNS</li>
+              <li>Amazon QuickSight + Q</li>
             </ul>
-          </div>
-        </div>
-      </div>
-      <div className="rounded-lg border border-slate-200 bg-white p-6">
-        <h2 className="mb-2 text-lg font-bold text-slate-900">Build Modes</h2>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="rounded border border-emerald-200 bg-emerald-50 p-3">
-            <h4 className="text-sm font-bold text-emerald-800">Snowflake Only</h4>
-            <p className="mt-1 text-xs text-emerald-700">All features run natively in Snowflake. No AWS dependencies.</p>
-          </div>
-          <div className="rounded border border-violet-200 bg-violet-50 p-3">
-            <h4 className="text-sm font-bold text-violet-800">Full AWS + Snowflake</h4>
-            <p className="mt-1 text-xs text-violet-700">S3, Kinesis, SNS, QuickSight integrated with Snowflake Cortex AI.</p>
           </div>
         </div>
       </div>
@@ -195,15 +119,8 @@ export default function HomePage() {
     { id: 'domain-1', label: 'Emissions Tracking', icon: '📈', content: domainTab1 },
     { id: 'domain-2', label: 'Compliance', icon: '⚡', content: domainTab2 },
     { id: 'ask-ai', label: 'Ask AI', icon: '🤖', content: askAiTab },
-    { id: 'architecture', label: 'Architecture & Data', icon: '🏗️', content: architectureTab },
+    { id: 'architecture', label: 'Architecture', icon: '🏗️', content: architectureTab },
   ];
 
-  return (
-    <AppLayout
-      title={title}
-      subtitle="Powered by Snowflake + AWS"
-      tabs={tabs}
-      narrative={narrative}
-    />
-  );
+  return <AppLayout title={title} subtitle="Powered by Snowflake + AWS" tabs={tabs} narrative={narrative} />;
 }
