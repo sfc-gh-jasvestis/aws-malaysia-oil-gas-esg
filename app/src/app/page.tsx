@@ -74,7 +74,7 @@ export default function HomePage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <Chart data={data?.breakdown || [{ label: 'A', value: 30 }, { label: 'B', value: 70 }]} type="pie" xKey="label" yKeys={[{ key: 'value', name: 'Score' }]} title="Regulatory Score by Region" />
-        <ActionMemo persona={{ name: 'Dato' Razali Ismail', role: 'VP Sustainability' }} context={{}} onGenerate={async () => ({ subject: 'Action Required', body: 'AI-generated recommendation based on current data.', urgency: 'HIGH', actions: ['Investigate methane leak at Platform Dulang-B', 'Submit MyCarbon report to BURSA', 'Accelerate Kasawari CCS project'] })} />
+        <ActionMemo persona={{ name: 'Dato Razali Ismail', role: 'VP Sustainability' }} context={{}} onGenerate={async () => ({ subject: 'Action Required', body: 'AI-generated recommendation based on current data.', urgency: 'HIGH', actions: ['Investigate methane leak at Platform Dulang-B', 'Submit MyCarbon report to BURSA', 'Accelerate Kasawari CCS project'] })} />
       </div>
     </div>
   );
