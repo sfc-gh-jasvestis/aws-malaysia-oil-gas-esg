@@ -32,15 +32,23 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
+
+  // Look up a KPI value returned by /api/data (sourced from CURATED.KPI_SUMMARY).
+  // Falls back to the original literal so the card still renders if the API,
+  // or KPI_SUMMARY, is unavailable.
+  const kpiVal = (title: string, fallback: string): string =>
+    (data?.kpiCards as { title: string; value: string }[] | undefined)
+      ?.find((k) => k.title === title)?.value ?? fallback;
+
   const title = narrative?.title || 'SEA AWS Demo';
 
   const executiveCockpit = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <KPICard title="Carbon Intensity" value="18.2 kgCO2e/boe" status="neutral" />
-        <KPICard title="Methane Leaks" value="3" status="warning" />
-        <KPICard title="Flaring Reduction" value="-24%" status="neutral" />
-        <KPICard title="Platforms" value="42" status="neutral" />
+        <KPICard title="Carbon Intensity" value={kpiVal('Carbon Intensity', '18.2 kgCO2e/boe')} status="neutral" />
+        <KPICard title="Methane Leaks" value={kpiVal('Methane Leaks', '3')} status="warning" />
+        <KPICard title="Flaring Reduction" value={kpiVal('Flaring Reduction', '-24%')} status="neutral" />
+        <KPICard title="Platforms" value={kpiVal('Platforms', '42')} status="neutral" />
       </div>
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="lg:col-span-1">
@@ -63,9 +71,9 @@ export default function HomePage() {
   const domainTab1 = (
     <div className="space-y-6">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <KPICard title="Scope 1+2" value="1.4M tCO2e" />
-        <KPICard title="CCS Capacity" value="2.4 MT/yr" />
-        <KPICard title="Net Zero Gap" value="-42%" />
+        <KPICard title="Scope 1+2" value={kpiVal('Scope 1+2', '1.4M tCO2e')} />
+        <KPICard title="CCS Capacity" value={kpiVal('CCS Capacity', '2.4 MT/yr')} />
+        <KPICard title="Net Zero Gap" value={kpiVal('Net Zero Gap', '-42%')} />
       </div>
       <Chart data={data?.detail || [{ x: 'Mon', y: 24 }, { x: 'Tue', y: 28 }, { x: 'Wed', y: 22 }, { x: 'Thu', y: 31 }, { x: 'Fri', y: 26 }, { x: 'Sat', y: 19 }, { x: 'Sun', y: 23 }]} type="area" xKey="x" yKeys={[{ key: 'y', name: 'MtCO2e' }]} title="Pathway to Net Zero 2050" height={400} />
     </div>
