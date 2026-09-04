@@ -53,6 +53,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="lg:col-span-1">
           <GeoMap country="malaysia"
+            labels={{ entity: 'Assets', event: 'Emission Records', alert: 'Exceedances' }}
             regions={data?.regions} markers={[{"label": "Penang", "value": "Fab: util 92%", "color": "green", "size": "lg"}, {"label": "Kuala Lumpur", "value": "HQ", "color": "blue", "size": "md"}, {"label": "Johor Bahru", "value": "Southern ops", "color": "green", "size": "md"}]} routes={[]} title="Geographic Overview" height={400} />
         </div>
         <div className="lg:col-span-1 grid grid-cols-1 gap-4">
@@ -63,9 +64,14 @@ export default function HomePage() {
       <DataTable columns={[
           { key: 'id', header: '#' },
           { key: 'name', header: 'Asset' },
+          { key: 'region', header: 'Region' },
           { key: 'status', header: 'Rating' },
-          { key: 'value', header: 'Carbon Intensity' },
-      ]} data={data?.entities || []} title="Asset ESG Dashboard" />
+          { key: 'm1', header: 'Carbon Intensity' },
+          { key: 'm2', header: 'Methane Leaks' },
+          { key: 'm3', header: 'Flaring Reduction' },
+          { key: 'events', header: 'Emission Records' },
+          { key: 'alerts', header: 'Exceedances' },
+        ]} data={data?.entities || []} title="Asset ESG Dashboard" />
     </div>
   );
 
